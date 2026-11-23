@@ -1,0 +1,23 @@
+# Render blueprint for the API. Postgres: use Neon or Supabase and paste its URL into DATABASE_URL
+# (use the "postgresql+psycopg://" form). Secrets are marked sync: false and entered in the dashboard.
+services:
+  - type: web
+    name: vani-guard-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - { key: VANI_DEV, value: "0" }
+      - { key: VANI_MODEL_BACKEND, value: gemini }
+      - { key: TRUST_PROXY, value: "1" }
+      - { key: ARMS_ENABLED, value: "1" }
+      - { key: PROBES_ENABLED, value: "1" }
+      - { key: STUDY_PAUSED, value: "0" }
+      - { key: APP_VERSION, value: "1.0.0" }
+      - { key: GEMINI_API_KEY, sync: false }
+      - { key: GEMINI_MODEL, sync: false }
+      - { key: DATABASE_URL, sync: false }
+      - { key: ADMIN_TOKEN, sync: false }
+      - { key: ALLOWED_ORIGINS, sync: false }      # your Vercel URL, e.g. https://vani-guard.vercel.app
+      - { key: DAILY_COST_CAP_USD, sync: false }
+      - { key: SESSION_COST_CAP_USD, sync: false }

@@ -1,0 +1,28 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: pip install -e "apps/api[dev]"
+      - run: cd apps/api && ruff check . && mypy --strict vani/domain && python -m pytest -q
+      - name: secret scan (no keys in the repo)
+        run: "! git grep -nE 'AIza[0-9A-Za-z_-]{30,}|sk-[A-Za-z0-9]{30,}' -- . ':!*.lock' ':!package-lock.json'"
+      - run: pip install pip-audit && pip-audit --skip-editable || true   # advisory; review output
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: pip install -e "apps/api[dev]"
+      - run: cd apps/web && npm ci && npm run lint && npm run typecheck && NEXT_PUBLIC_DEV=0 npm run build
+      - run: ./scripts/test-web.sh
+      - run: cd apps/web && npm audit --omit=dev --audit-level=high
