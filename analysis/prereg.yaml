@@ -1,0 +1,14 @@
+# Copy these values from docs/PREREG.md BEFORE data collection starts. Changing them afterwards is an amendment.
+# If b_max is null the analysis still runs (with 0.05) but prints a loud "PREREG INCOMPLETE" banner.
+b_max: null            # max acceptable wrong-execution rate, as a fraction (0.05 = 5%): Wilson 95% upper bound
+folds: 5               # participant-grouped cross-validation folds
+n_boot: 2000           # participant-grouped bootstrap resamples
+seed: 0
+h1_min_delta_auroc: 0.03
+h3_unsafe_rate: 0.20
+h4_gap_points: 10
+# Business model: ASSUMPTIONS, not findings. Every value below is a labelled guess to be varied on the grid.
+business:
+  value_per_tap_inr: [0.5, 1, 2, 5]
+  avg_loss_per_wrong_payment_inr: [100, 250, 500, 1000, 2000, 5000]
+  usd_inr: 85
