@@ -1,0 +1,33 @@
+[project]
+name = "vani-api"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = ["numpy", "rapidfuzz", "pyyaml", "fastapi", "uvicorn", "sqlalchemy", "python-multipart", "google-genai", "pydantic", "alembic"]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]"]
+analysis = ["pandas", "matplotlib", "scikit-learn"]
+dev = ["pytest", "hypothesis", "ruff", "mypy", "types-PyYAML", "httpx", "pytest-cov", "pandas", "matplotlib", "scikit-learn"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["vani*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+
+[tool.ruff.lint]
+ignore = ["SIM905"]  # word tables are intentionally space-separated strings
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.File", "fastapi.Form", "fastapi.Depends"]

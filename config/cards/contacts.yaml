@@ -1,0 +1,17 @@
+# Starter contact list. Deliberately includes confusable pairs (Rahul/Rahul, Sumit/Sunit, Amit/Ankit, Ravi/Ravi Kumar).
+- {payee_id: rahul_sharma, display_name: Rahul Sharma, aliases: [Rahul S], devanagari_name: राहुल शर्मा, group_tag: rahul}
+- {payee_id: rahul_sethi, display_name: Rahul Sethi, aliases: [Rahul Seth], devanagari_name: राहुल सेठी, group_tag: rahul}
+- {payee_id: rohit_sharma, display_name: Rohit Sharma, aliases: [], devanagari_name: रोहित शर्मा, group_tag: sharma}
+- {payee_id: priya, display_name: Priya, aliases: [], devanagari_name: प्रिया, group_tag: pp}
+- {payee_id: pooja, display_name: Pooja, aliases: [Puja], devanagari_name: पूजा, group_tag: pp}
+- {payee_id: amit, display_name: Amit, aliases: [], devanagari_name: अमित, group_tag: amit_ankit}
+- {payee_id: ankit, display_name: Ankit, aliases: [], devanagari_name: अंकित, group_tag: amit_ankit}
+- {payee_id: sumit, display_name: Sumit, aliases: [], devanagari_name: सुमित, group_tag: sumit_sunit}
+- {payee_id: sunit, display_name: Sunit, aliases: [], devanagari_name: सुनित, group_tag: sumit_sunit}
+- {payee_id: ravi, display_name: Ravi, aliases: [], devanagari_name: रवि, group_tag: ravi}
+- {payee_id: ravi_kumar, display_name: Ravi Kumar, aliases: [], devanagari_name: रवि कुमार, group_tag: ravi}
+- {payee_id: neha, display_name: Neha, aliases: [], devanagari_name: नेहा, group_tag: other}
+- {payee_id: vikram, display_name: Vikram, aliases: [], devanagari_name: विक्रम, group_tag: other}
+- {payee_id: sneha, display_name: Sneha, aliases: [], devanagari_name: स्नेहा, group_tag: other}
+- {payee_id: papa, display_name: Papa, aliases: [Dad, Pappa], devanagari_name: पापा, group_tag: family}
+- {payee_id: mummy, display_name: Mummy, aliases: [Mom, Maa], devanagari_name: मम्मी, group_tag: family}

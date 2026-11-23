@@ -1,0 +1,7 @@
+# Fill from the CURRENT Google AI Studio pricing page for the exact pinned model. Do not guess.
+# While any value below is null the API refuses to start in live (gemini) mode.
+pricing_version: null        # e.g. the date you copied the prices, "2026-11-19"
+model: null                  # must equal GEMINI_MODEL
+usd_per_million_input_tokens: null
+usd_per_million_output_tokens: null        # thinking tokens, if any, are billed as output
+usd_per_million_audio_input_tokens: null   # optional; falls back to the input price

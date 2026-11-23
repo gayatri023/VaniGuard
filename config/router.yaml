@@ -1,0 +1,19 @@
+# PLACEHOLDERS. None of these numbers is tuned or measured.
+# Change any value => bump router_version and add a DECISIONS.md entry.
+router_version: v1-placeholder-0
+thresholds:
+  amount: 0.90
+  payee: 0.85
+  intent: 0.80
+weights:            # combined confidence = weighted mean of the three signals
+  self_conf: 0.3
+  agreement: 0.4
+  validator: 0.3
+payee_ambiguity_delta: 0.10   # top-1 minus top-2 score below this => ambiguous
+confusable_penalty: 0.15      # subtracted from amount validator score for 13/30-style pairs
+max_chips: 3
+hard_flags:         # any of these forces Tier C
+  - amount_over_ceiling
+  - amount_mismatch_transcript
+  - intent_not_send_money
+  - empty_or_short_transcript
