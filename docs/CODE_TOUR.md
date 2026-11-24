@@ -32,3 +32,9 @@ analysis/      prereg.yaml · pipeline.py · run.py
 docs/          see README
 ```
 Regenerate the theme from one seed colour: `cd apps/web && npm run theme` (Google's Material Color Utilities). Icons: `npm run icons` (Material Symbols).
+
+## Live model (real speech)
+1. Create `.env` in the repo root from `.env.example`: `VANI_MODEL_BACKEND=gemini`, `GEMINI_API_KEY`, `GEMINI_MODEL`, both cost caps, `ADMIN_TOKEN` (16+ characters), `ALLOWED_ORIGINS`.
+2. Fill `config/pricing.yaml` from the pricing page; its `model` must equal `GEMINI_MODEL`.
+3. `cd apps/api && python -m uvicorn vani.app:create_app --factory --port 8000`. If anything is missing it refuses to start and says what.
+4. Check the pipeline first: `python -m vani.livecheck path/to/clips` (see `config/fixtures/README.md`).

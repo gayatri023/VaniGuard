@@ -34,7 +34,7 @@ The decision logic lives in pure, typed, property-tested functions (`apps/api/va
 - **Append-only in the database itself** (triggers; one documented exception for participant deletion), Alembic migrations, idempotent submissions, per-session and daily cost caps that fail closed, a kill switch.
 - **Privacy:** no identifiers, audio never persisted (tested on every path), deletion with a code, consent wording always matches what actually runs.
 - **Study design built in:** per-card randomised arms (routed vs always-confirm, permuted blocks), seeded-error probes for confirmation blindness, a 41-card stratified pool.
-- **Quality:** 197 API tests (96% coverage, domain modules 95% or more, mypy strict), 31 UI tests that drive the real app against the real API (full journeys, arms, dashboard, 22 accessibility checks with a negative control).
+- **Quality:** 200 API tests (96% coverage, domain modules 95% or more, mypy strict), 31 UI tests that drive the real app against the real API (full journeys, arms, dashboard, 22 accessibility checks with a negative control).
 
 ## Run it
 ```
@@ -43,7 +43,7 @@ pip install -e "apps/api[dev]"
 make dev-api                              # terminal 1: API on :8000 with the dev simulator (no key needed)
 cd apps/web && cp .env.example .env.local && npm install && cd ../..
 make dev-web                              # terminal 2: http://localhost:3000   (dashboard: /admin, token dev-admin-token; every screen: /dev/states)
-make test && make test-web                # 197 API tests; 31 UI tests (boots 3 dev APIs itself)
+make test && make test-web                # 200 API tests; 31 UI tests (boots 3 dev APIs itself)
 make demo-analysis                        # SYNTHETIC participants -> CSV -> results.md, figures, tables
 ```
 Real speech: record clips and run `python -m vani.livecheck clips/` (header of `vani/livecheck.py` explains the format). Deployment and the pilot: `docs/DEPLOY.md`, `docs/PILOT_RUNBOOK.md`. A tour of the code: `docs/CODE_TOUR.md`.

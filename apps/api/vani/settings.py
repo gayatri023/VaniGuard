@@ -6,6 +6,7 @@ import os
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -77,11 +78,46 @@ class Settings:
     router: RouterSettings
 
 
+def _parse_dotenv(text: str) -> dict[str, str]:
+    """Minimal .env parser: KEY=value, optional `export`, quotes, comments, CRLF."""
+    out: dict[str, str] = {}
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        line = line.removeprefix("export ")
+        key, _, val = line.partition("=")
+        key, val = key.strip(), val.strip()
+        if val[:1] in ("'", '"'):
+            end = val.find(val[0], 1)
+            val = val[1:end] if end != -1 else val[1:]
+        else:
+            val = val.split(" #")[0].strip()
+        if key.isidentifier():
+            out[key] = val
+    return out
+
+
+def load_dotenv_files(paths: list[Path] | None = None, environ: dict[str, str] | None = None) -> list[Path]:
+    """Fill the environment from .env files WITHOUT overriding variables that are already set.
+    Precedence: real environment, then apps/api/.env, then the repo-root .env. Files are never committed."""
+    target: Any = os.environ if environ is None else environ
+    loaded: list[Path] = []
+    for path in paths if paths is not None else [REPO_ROOT / "apps" / "api" / ".env", REPO_ROOT / ".env"]:
+        if path.is_file():
+            for k, v in _parse_dotenv(path.read_text(encoding="utf-8-sig")).items():  # utf-8-sig: Notepad adds a BOM
+                target.setdefault(k, v)
+            loaded.append(path)
+    return loaded
+
+
 def _truthy(v: str | None) -> bool:
     return (v or "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def load_settings(env: Mapping[str, str] | None = None) -> Settings:
+    if env is None:
+        load_dotenv_files()
     e = os.environ if env is None else env
     dev = _truthy(e.get("VANI_DEV"))
     backend = (e.get("VANI_MODEL_BACKEND") or ("fake" if dev else "gemini")).strip().lower()

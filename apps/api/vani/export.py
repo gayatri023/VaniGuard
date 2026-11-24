@@ -14,6 +14,7 @@ from sqlalchemy import inspect, select
 from sqlalchemy.orm import Session, sessionmaker
 
 from .db import Base, CommandRow, SessionRow, make_engine
+from .settings import load_dotenv_files
 
 
 def _cell(v: Any) -> Any:
@@ -57,6 +58,7 @@ def export_all(database_url: str, out: Path) -> list[Path]:
 
 
 if __name__ == "__main__":
+    load_dotenv_files()
     target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/export")
     for p in export_all(os.environ.get("DATABASE_URL", "sqlite:///./vani.db"), target):
         print(p)

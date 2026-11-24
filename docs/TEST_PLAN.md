@@ -5,7 +5,7 @@
 |---|---|---|
 | Unit | Domain functions: 70+ spoken-amount cases (Roman and Devanagari), payee confusable sets, validators, confidence, router, metrics against hand-computed values | pytest, mypy strict on `domain/`, coverage 95%+ per domain module |
 | Property | Router never returns the fast path with a hard flag or invalid input; fast path if and only if the offset score is at least 0 | hypothesis |
-| Integration | Full API journeys with the dev simulator; every model failure mode; real audio formats through ffmpeg with no leftover temp files; arms, probes, caps, rate limits, CORS, admin auth, deletion, append-only guards; Alembic upgrade and downgrade | pytest (197 tests API-side, including analysis and live-check tests) |
+| Integration | Full API journeys with the dev simulator; every model failure mode; real audio formats through ffmpeg with no leftover temp files; arms, probes, caps, rate limits, CORS, admin auth, deletion, append-only guards; Alembic upgrade and downgrade | pytest (200 tests API-side, including analysis and live-check tests) |
 | Analysis | Dashboard replay equals analysis to 4 decimals; two runs are byte-identical; folds never split a participant | pytest |
 | UI | Complete participant journeys against the real API, always-confirm arm and probe disclosure, dashboard numbers match the API, 22 accessibility checks (axe-core, with a negative control) | vitest + testing-library (31 tests) |
 | Static | ruff, ESLint, TypeScript strict, production build, secret scan, `npm audit` | CI |
