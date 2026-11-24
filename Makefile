@@ -4,7 +4,7 @@ setup:
 test:
 	cd apps/api && python -m pytest -q
 test-web:    ## boots 3 dev APIs, runs all UI tests (journey, arms, admin dashboard, accessibility)
-	./scripts/test-web.sh
+	bash scripts/test-web.sh
 lint:
 	cd apps/api && ruff check . && cd ../web && npm run lint
 typecheck:

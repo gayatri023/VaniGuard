@@ -24,5 +24,5 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install -e "apps/api[dev]"
       - run: cd apps/web && npm ci && npm run lint && npm run typecheck && NEXT_PUBLIC_DEV=0 npm run build
-      - run: ./scripts/test-web.sh
+      - run: bash scripts/test-web.sh
       - run: cd apps/web && npm audit --omit=dev --audit-level=high
